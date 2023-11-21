@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image} from "react-bootstrap";
+import BtnSelect from "./BtnSelect";
 
 function Friend({friend}) {
     return (
@@ -26,7 +27,7 @@ function Friend({friend}) {
                     </p>
                 )}
 
-                <button className={"button"}>Select</button>
+                <BtnSelect>Select</BtnSelect>
             </li>
         </>
     );

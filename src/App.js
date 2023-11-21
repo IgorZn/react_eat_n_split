@@ -1,6 +1,8 @@
 import './App.css';
 import {Col, Row} from "react-bootstrap";
 import ListFriends from "./components/ListFriends";
+import FormAddFriend from "./components/FormAddFriend";
+import BtnSelect from "./components/BtnSelect";
 
 const friends = [
     {
@@ -28,6 +30,8 @@ function App() {
         <div className="app">
             <div className="sidebar">
                 <ListFriends friends={friends}/>
+                <FormAddFriend/>
+                <BtnSelect>Add friend</BtnSelect>
             </div>
 
         </div>
