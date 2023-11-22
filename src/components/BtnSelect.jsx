@@ -1,8 +1,8 @@
 import React from 'react';
 
-function BtnSelect({children}) {
+function BtnSelect({children, handle}) {
     return (
-        <button className={"button"}>{children}</button>
+        <button className={"button"} onClick={handle}>{children}</button>
     );
 }
 

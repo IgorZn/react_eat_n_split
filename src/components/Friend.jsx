@@ -23,7 +23,7 @@ function Friend({friend}) {
 
                 {friend.balance === 0 && (
                     <p>
-                        You and {friend.name} {Math.abs(friend.balance)} are even
+                        You and {friend.name} <strong>{Math.abs(friend.balance)}</strong> are even
                     </p>
                 )}
 

@@ -4,40 +4,28 @@ import ListFriends from "./components/ListFriends";
 import FormAddFriend from "./components/FormAddFriend";
 import BtnSelect from "./components/BtnSelect";
 
-const friends = [
-    {
-        id: Date.now(),
-        name: 'Clark',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026704d',
-        balance: -1
-    },
-    {
-        id: Date.now(),
-        name: 'Sarah',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026705d',
-        balance: 10
-    },
-    {
-        id: Date.now(),
-        name: 'Anthony',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026706d',
-        balance: 0
-    },
-]
+import { friends } from './fakeFriends'
+import {useState} from "react";
+import FormSplitBill from "./components/FormSplitBill";
 
 function App() {
+    const [addFriend, setAddFriend] = useState(true)
+    const handleAddFriend = () => {
+        setAddFriend(c => c = null)
+
+    }
+
+
     return (
         <div className="app">
             <div className="sidebar">
                 <ListFriends friends={friends}/>
-                <FormAddFriend/>
-                <BtnSelect>Add friend</BtnSelect>
+                {addFriend ?? <FormAddFriend/>}
+                <BtnSelect handle={handleAddFriend}>Add friend</BtnSelect>
             </div>
-
+            <FormSplitBill/>
         </div>
     )
 }
-
-'TEST'
 
 export default App;
