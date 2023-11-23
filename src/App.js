@@ -4,14 +4,15 @@ import ListFriends from "./components/ListFriends";
 import FormAddFriend from "./components/FormAddFriend";
 import BtnSelect from "./components/BtnSelect";
 
-import { friends } from './fakeFriends'
+import { fakeFriends } from './fakeFriends'
 import {useState} from "react";
 import FormSplitBill from "./components/FormSplitBill";
 
 function App() {
+    const [friends, setFriends] = useState(fakeFriends);
     const [addFriend, setAddFriend] = useState(true)
     const handleAddFriend = () => {
-        setAddFriend(c => c = null)
+        setAddFriend(c => !c)
 
     }
 
@@ -20,8 +21,10 @@ function App() {
         <div className="app">
             <div className="sidebar">
                 <ListFriends friends={friends}/>
-                {addFriend ?? <FormAddFriend/>}
-                <BtnSelect handle={handleAddFriend}>Add friend</BtnSelect>
+                {addFriend ? "" : <FormAddFriend setFriend={setFriends} setClose={setAddFriend}/>}
+                <BtnSelect handle={handleAddFriend}>
+                    {addFriend ? "Add friend" : "Close"}
+                </BtnSelect>
             </div>
             <FormSplitBill/>
         </div>
