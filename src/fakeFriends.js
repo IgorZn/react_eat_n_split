@@ -1,20 +1,17 @@
-export const fakeFriends = [
-    {
-        id: Date.now(),
-        name: 'Clark',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026704d',
-        balance: -1
-    },
-    {
-        id: Date.now(),
-        name: 'Sarah',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026705d',
-        balance: 10
-    },
-    {
-        id: Date.now(),
-        name: 'Anthony',
-        image: 'https://i.pravatar.cc/48?u=a042581f4e29026706d',
-        balance: 0
-    },
-]
+import { faker } from '@faker-js/faker';
+
+export const fakeFriends = (num = 5) => {
+    const friends = []
+    for (let i = 0; i < num; i++) {
+        friends.push(
+            {
+                id: +faker.string.numeric({length: {min: 10, max: 10}}),
+                name: faker.person.firstName(),
+                image: `https://i.pravatar.cc/48?u=a042581f4e2902670${i}d`,
+                balance: +faker.string.numeric(2)
+            }
+        )
+    }
+
+    return friends
+}

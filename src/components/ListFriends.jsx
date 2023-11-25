@@ -1,13 +1,17 @@
 import React from 'react';
-import {Col, Image, Row} from "react-bootstrap";
 import Friend from "./Friend";
 
-function ListFriends({friends}) {
+function ListFriends({friends, onSelection, selectedName, setShowAddFriend}) {
     return (
         <div>
             <ul>
                 {friends.map(friend => (
-                    <Friend friend={friend} key={Math.random()}/>
+                    <Friend
+                        friend={friend}
+                        key={Math.random()}
+                        onSelection={onSelection}
+                        setShowAddFriend={setShowAddFriend}
+                        selectedFriend={selectedName}/>
                 ))}
             </ul>
         </div>

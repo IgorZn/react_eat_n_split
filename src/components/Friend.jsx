@@ -2,10 +2,17 @@ import React from 'react';
 import {Image} from "react-bootstrap";
 import BtnSelect from "./BtnSelect";
 
-function Friend({friend}) {
+function Friend({friend, onSelection, selectedFriend, setShowAddFriend}) {
+    const isSelected = selectedFriend?.id === friend.id
+    const handleGetSelectedName = () => {
+        onSelection((current) => (
+            current?.id === friend.id ? null : friend
+        ))
+        setShowAddFriend(true)
+    }
     return (
         <>
-            <li key={friend.id}>
+            <li key={friend.id} className={isSelected ? "selected" : ""}>
                 <h3>{friend.name}</h3>
                 <Image src={friend.image} alt={friend.name}/>
 
@@ -17,7 +24,7 @@ function Friend({friend}) {
 
                 {friend.balance > 0 && (
                     <p className="green">
-                        {friend.name} owe  {Math.abs(friend.balance)} €
+                        {friend.name} owe {Math.abs(friend.balance)} €
                     </p>
                 )}
 
@@ -27,7 +34,7 @@ function Friend({friend}) {
                     </p>
                 )}
 
-                <BtnSelect>Select</BtnSelect>
+                <BtnSelect onClick={handleGetSelectedName}>{isSelected ? "Close" : "Select"}</BtnSelect>
             </li>
         </>
     );

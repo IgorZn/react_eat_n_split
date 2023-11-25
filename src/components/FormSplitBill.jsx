@@ -2,15 +2,16 @@ import React from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import BtnSelect from "./BtnSelect";
 
-function FormSplitBill(props) {
+function FormSplitBill({fiendName}) {
+    const placeholder = fiendName.name + "' expense"
     return (
         <>
 
             <Form className={"form-split-bill"}>
-                <h2 className={""}>Split a bill with X</h2>
+                <h2 className={""}>Split a bill with - {fiendName.name}</h2>
                 <Form.Group className="" controlId="formBill">
                     <Row className={""}>
-                        <Col><Form.Label>Bill value</Form.Label></Col>
+                        <Col><Form.Label className={""}>Bill value</Form.Label></Col>
                         <Col><Form.Control
                             type="text"
                             placeholder="Bill value"
@@ -33,8 +34,8 @@ function FormSplitBill(props) {
                 <fieldset disabled>
                     <Form.Group className="" controlId="xExpense">
                         <Row className={""}>
-                            <Col><Form.Label>X' expense</Form.Label></Col>
-                            <Col><Form.Control type="text" placeholder="X expense"/></Col>
+                            <Col><Form.Label>{fiendName.name}' expense</Form.Label></Col>
+                            <Col><Form.Control type="text" placeholder={placeholder}/></Col>
                         </Row>
                     </Form.Group>
                 </fieldset>
@@ -44,7 +45,7 @@ function FormSplitBill(props) {
                         <Col>
                             <Form.Select >
                                 <option value="user">You</option>
-                                <option value="friend">X</option>
+                                <option value="friend">{fiendName.name}</option>
                             </Form.Select>
                         </Col>
                     </Row>
