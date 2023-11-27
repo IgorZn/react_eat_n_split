@@ -1,9 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import BtnSelect from "./BtnSelect";
 
 function FormSplitBill({fiendName}) {
-    const placeholder = fiendName.name + "' expense"
+    const [bill, setBill] = useState(null);
+    const [paidByUser, setPaidByUser] = useState(null);
+    const [whoIsPaying, setWhoIsPaying] = useState("user");
+
+    const handleBill = (e) => {
+        e.preventDefault()
+        setBill(+e.target.value)
+    }
+
+    const handlePaidByUser = (e) => {
+        e.preventDefault()
+        const value = +e.target.value
+        value > bill ? setPaidByUser(c => c) : setPaidByUser(value)
+
+    }
+
+    const handleWhoIsPaying = (e) => {
+        e.preventDefault()
+        setWhoIsPaying(e.target.value)
+    }
+
+    const placeholder = bill ? bill - paidByUser : fiendName.name + "' expense"
+
     return (
         <>
 
@@ -11,10 +33,12 @@ function FormSplitBill({fiendName}) {
                 <h2 className={""}>Split a bill with - {fiendName.name}</h2>
                 <Form.Group className="" controlId="formBill">
                     <Row className={""}>
-                        <Col><Form.Label className={""}>Bill value</Form.Label></Col>
+                        <Col><Form.Label className={""}>Total bill value</Form.Label></Col>
                         <Col><Form.Control
                             type="text"
                             placeholder="Bill value"
+                            value={bill}
+                            onChange={handleBill}
                             onClick={(e) => e.target.placeholder = ""}
                             onBlur={(e) => e.target.placeholder = "Bill value"}
                         /></Col>
@@ -22,10 +46,12 @@ function FormSplitBill({fiendName}) {
                 </Form.Group>
                 <Form.Group className="" controlId="formExpense">
                     <Row className={""}>
-                        <Col><Form.Label>Your expense</Form.Label></Col>
+                        <Col><Form.Label>Your part</Form.Label></Col>
                         <Col><Form.Control
                             type="text"
-                            placeholder="Your expense"
+                            placeholder="Your part"
+                            value={paidByUser}
+                            onChange={handlePaidByUser}
                             onClick={(e) => e.target.placeholder = ""}
                             onBlur={(e) => e.target.placeholder = "Your expense"}
                         /></Col>
@@ -43,7 +69,9 @@ function FormSplitBill({fiendName}) {
                     <Row className={""}>
                         <Col><Form.Label>Who is paying the bill</Form.Label></Col>
                         <Col>
-                            <Form.Select >
+                            <Form.Select
+                                value={whoIsPaying}
+                                onChange={handleWhoIsPaying}>
                                 <option value="user">You</option>
                                 <option value="friend">{fiendName.name}</option>
                             </Form.Select>
