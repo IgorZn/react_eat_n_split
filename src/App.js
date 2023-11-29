@@ -29,7 +29,7 @@ function App() {
                     {addFriend ? "Add friend" : "Close"}
                 </BtnSelect>
             </div>
-            {selectFriend && <FormSplitBill fiendName={selectFriend}/>}
+            {selectFriend && <FormSplitBill fiendName={selectFriend} setFriend={setFriends}/>}
 
         </div>
     )

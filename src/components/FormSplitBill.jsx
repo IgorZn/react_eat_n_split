@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Col, Form, Row} from "react-bootstrap";
 import BtnSelect from "./BtnSelect";
 
-function FormSplitBill({fiendName}) {
+function FormSplitBill({fiendName, setFriend}) {
     const [bill, setBill] = useState(null);
     const [paidByUser, setPaidByUser] = useState(null);
     const [whoIsPaying, setWhoIsPaying] = useState("user");
@@ -24,12 +24,28 @@ function FormSplitBill({fiendName}) {
         setWhoIsPaying(e.target.value)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!bill || !paidByUser) return
+    }
+
+    const handleChange = (e) => {
+        console.log(e.target.value)
+        console.log(whoIsPaying === e.target.value ? whoIsPaying : -paidByUser)
+        const value = whoIsPaying === e.target.value ? whoIsPaying : -paidByUser
+        setFriend((friends) =>
+            friends.map((friend) => {
+                if (friend.id === fiendName.id) return {...friend, balance: friend.balance + value}
+                return friend
+            }))
+    }
+
     const placeholder = bill ? bill - paidByUser : fiendName.name + "' expense"
 
     return (
         <>
 
-            <Form className={"form-split-bill"}>
+            <Form className={"form-split-bill"} onSubmit={handleSubmit} onChange={handleChange}>
                 <h2 className={""}>Split a bill with - {fiendName.name}</h2>
                 <Form.Group className="" controlId="formBill">
                     <Row className={""}>
